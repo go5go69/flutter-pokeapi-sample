@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke_match/constants/app_sizes.dart';
-import 'package:poke_match/domain/models/pokemon.dart';
+import 'package:poke_match/presentations/view_models/home_page_model.dart';
 import 'package:poke_match/presentations/views/widgets/app_icon_button.dart';
 import 'package:poke_match/presentations/views/widgets/pokemon_card.dart';
 
@@ -9,15 +9,11 @@ class HomePage extends ConsumerWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dummy = Pokemon(
-      id: 25,
-      name: 'pikachu',
-      types: ['electric', 'dummy'],
-      height: 0.4,
-      weight: 6,
-      imageUrl:
-          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png',
-    );
+    final pageState = switch (ref.watch(homePageModelProvider)) {
+      AsyncData(:final value) => value,
+      _ => null,
+    };
+    
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -25,18 +21,20 @@ class HomePage extends ConsumerWidget {
           width: MediaQuery.sizeOf(context).width * 0.5,
         ),
       ),
-      body: SafeArea(
+      body: pageState == null
+          ? const Center(child: CircularProgressIndicator.adaptive())
+          : SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
           child: Column(
             children: [
               gapH8,
               PokemonCard(
-                name: dummy.name,
-                imageUrl: dummy.imageUrl,
-                types: dummy.types,
-                height: dummy.height,
-                weight: dummy.weight,
+                      name: pageState.name,
+                      imageUrl: pageState.imageUrl,
+                      types: pageState.types,
+                      height: pageState.height,
+                      weight: pageState.weight,
               ),
               const Spacer(),
               Padding(
