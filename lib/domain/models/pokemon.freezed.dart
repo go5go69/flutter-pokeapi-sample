@@ -162,23 +162,26 @@ class __$$PokemonImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PokemonImpl implements _Pokemon {
   _$PokemonImpl(
-      {required this.id,
-      required this.name,
-      required final List<String> types,
-      required this.height,
-      required this.weight,
-      required this.imageUrl})
+      {this.id = 0,
+      this.name = '',
+      final List<String> types = const [],
+      this.height = 0.0,
+      this.weight = 0.0,
+      this.imageUrl = ''})
       : _types = types;
 
   factory _$PokemonImpl.fromJson(Map<String, dynamic> json) =>
       _$$PokemonImplFromJson(json);
 
   @override
+  @JsonKey()
   final int id;
   @override
+  @JsonKey()
   final String name;
   final List<String> _types;
   @override
+  @JsonKey()
   List<String> get types {
     if (_types is EqualUnmodifiableListView) return _types;
     // ignore: implicit_dynamic_type
@@ -186,10 +189,13 @@ class _$PokemonImpl implements _Pokemon {
   }
 
   @override
+  @JsonKey()
   final double height;
   @override
+  @JsonKey()
   final double weight;
   @override
+  @JsonKey()
   final String imageUrl;
 
   @override
@@ -232,12 +238,12 @@ class _$PokemonImpl implements _Pokemon {
 
 abstract class _Pokemon implements Pokemon {
   factory _Pokemon(
-      {required final int id,
-      required final String name,
-      required final List<String> types,
-      required final double height,
-      required final double weight,
-      required final String imageUrl}) = _$PokemonImpl;
+      {final int id,
+      final String name,
+      final List<String> types,
+      final double height,
+      final double weight,
+      final String imageUrl}) = _$PokemonImpl;
 
   factory _Pokemon.fromJson(Map<String, dynamic> json) = _$PokemonImpl.fromJson;
 

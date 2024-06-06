@@ -6,12 +6,12 @@ part 'pokemon.g.dart';
 @freezed
 class Pokemon with _$Pokemon {
   factory Pokemon({
-    required int id,
-    required String name,
-    required List<String> types,
-    required double height,
-    required double weight,
-    required String imageUrl,
+    @Default(0) int id,
+    @Default('') String name,
+    @Default([]) List<String> types,
+    @Default(0.0) double height,
+    @Default(0.0) double weight,
+    @Default('') String imageUrl,
   }) = _Pokemon;
 
   factory Pokemon.fromJson(Map<String, dynamic> json) =>

@@ -8,12 +8,14 @@ part of 'pokemon.dart';
 
 _$PokemonImpl _$$PokemonImplFromJson(Map<String, dynamic> json) =>
     _$PokemonImpl(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-      types: (json['types'] as List<dynamic>).map((e) => e as String).toList(),
-      height: (json['height'] as num).toDouble(),
-      weight: (json['weight'] as num).toDouble(),
-      imageUrl: json['imageUrl'] as String,
+      id: (json['id'] as num?)?.toInt() ?? 0,
+      name: json['name'] as String? ?? '',
+      types:
+          (json['types'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+              const [],
+      height: (json['height'] as num?)?.toDouble() ?? 0.0,
+      weight: (json['weight'] as num?)?.toDouble() ?? 0.0,
+      imageUrl: json['imageUrl'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$PokemonImplToJson(_$PokemonImpl instance) =>
