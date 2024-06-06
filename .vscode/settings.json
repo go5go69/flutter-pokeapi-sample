@@ -1,0 +1,73 @@
+{
+	// 使用するFlutter SDKのパスを指定
+	"dart.flutterSdkPath": ".fvm/flutter_sdk",
+	// 指定したファイルを監視から除外する
+	"files.watcherExclude": {
+		"**/.fvm": true
+	},
+	// ブラケットをペアごとに色付けするなら`true`
+	"editor.bracketPairColorization.enabled": true,
+	// ブラケットペアのガイド表示を有効にするなら`true`
+	"editor.guides.bracketPairs": true,
+	// ホワイトスペース文字の表示
+	// "editor.renderWhitespace": "all",
+	"[dart]": {
+		// 保存時にフォーマットを実行するなら`true`
+		"editor.formatOnSave": true,
+		// 入力した行をフォーマットを実行するなら`true`
+		"editor.formatOnType": true,
+		// 貼り付けした時にフォーマットを実行するなら`true`
+		"editor.formatOnPaste": true,
+		// 垂直ルーラーを表示する文字数の位置。複数指定可
+		"editor.rulers": [
+			80
+		],
+		// デフォルトフォーマッターの指定
+		"editor.defaultFormatter": "Dart-Code.dart-code",
+		// 選択された変数への正確な参照のみをハイライトするDartの機能を妨げないために`false`
+		"editor.selectionHighlight": false,
+		// ファイル保存時に実行されるコードアクション
+		"editor.codeActionsOnSave": {
+			// セミコロンを挿入する。
+			"quickfix.insertSemicolon": "always",
+			// インポートを整理する。
+			"source.organizeImports": "always",
+			// 足りないインポートを追加する。
+			"source.addMissingImports": "always",
+			// save時に自動でconstを付与
+			"source.fixAll": "explicit"
+		},
+	},
+	// Explorer上でファイルをグループ化しネスト表示させる
+	"explorer.fileNesting.patterns": {
+		"pubspec.yaml": "pubspec.lock,pubspec_overrides.yaml,.packages,.flutter-plugins,.flutter-plugins-dependencies,.metadata",
+		"*.dart": "${capture}.g.dart,${capture}.freezed.dart,${capture}.directories.g.dart"
+	},
+	"explorer.fileNesting.enabled": true,
+	"explorer.fileNesting.expand": false,
+	// pubspec.yamlが保存されるたびにpub getするなら`always`
+	"dart.runPubGetOnPubspecChanges": "always",
+	// クラス名を変更するとファイル名も自動で変更される。always, prompt, never
+	"dart.renameFilesWithClasses": "always",
+	// エクスプローラでファイルやフォルダをドラッグ＆ドロップした時に確認を求めるなら`true`
+	"explorer.confirmDragAndDrop": false,
+	// 現在のGitリポジトリのデフォルトリモートからコミットを自動で取得するなら`true`
+	// `all` に設定すると、全てのリモートから取得する
+	"git.autofetch": true,
+	// 検索対象から生成ファイルを除外する
+	"search.exclude": {
+		"**/*.dart_tool": true,
+		"**/*.freezed": true,
+		"**/*.g.dart": true,
+		"**/*.symlinks": true,
+		"**/.fvm/flutter_sdk": true,
+		"**/build": true,
+		"**/node_modules": true,
+		"**/Pods": true
+	},
+	"cSpell.words": [
+		"firestore",
+		"Pretendard",
+		"riverpod"
+	],
+}
