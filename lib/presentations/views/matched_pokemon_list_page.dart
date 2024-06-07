@@ -11,48 +11,54 @@ class MatchedPokemonListPage extends ConsumerWidget {
     final matchedPokemonState = ref.watch(matchedPokemonProviderProvider);
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              surfaceTintColor: Colors.transparent,
-              floating: true,
-              flexibleSpace: const FlexibleSpaceBar(
-                title: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: Sizes.p12),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Matched!!'),
-                  ),
-                ),
-              ),
-            ),
-            SliverList.builder(
-              itemCount: matchedPokemonState.length,
-              itemBuilder: (BuildContext context, int index) {
-                final pokemon = matchedPokemonState[index];
-                return Container(
-                  padding: const EdgeInsets.all(Sizes.p12),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(color: Theme.of(context).dividerColor),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: Sizes.appMaxWidth),
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  surfaceTintColor: Colors.transparent,
+                  floating: true,
+                  flexibleSpace: const FlexibleSpaceBar(
+                    title: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: Sizes.p12),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Matched!!'),
+                      ),
                     ),
                   ),
-                  child: Row(
-                    children: [
-                      Image.network(
-                        pokemon.imageUrl,
-                        height: Sizes.p48,
-                        width: Sizes.p48,
+                ),
+                SliverList.builder(
+                  itemCount: matchedPokemonState.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final pokemon = matchedPokemonState[index];
+                    return Container(
+                      padding: const EdgeInsets.all(Sizes.p12),
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom:
+                              BorderSide(color: Theme.of(context).dividerColor),
+                        ),
                       ),
-                      gapW16,
-                      Text(pokemon.name),
-                    ],
-                  ),
-                );
-              },
-            )
-          ],
+                      child: Row(
+                        children: [
+                          Image.network(
+                            pokemon.imageUrl,
+                            height: Sizes.p48,
+                            width: Sizes.p48,
+                          ),
+                          gapW16,
+                          Text(pokemon.name),
+                        ],
+                      ),
+                    );
+                  },
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

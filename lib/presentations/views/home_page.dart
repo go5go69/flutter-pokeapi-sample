@@ -16,55 +16,65 @@ class HomePage extends ConsumerWidget {
     final pageNotifier = ref.read(homePageViewModelProvider.notifier);
 
     return Scaffold(
+      appBar: AppBar(
+        title: Image.asset(
+          'assets/images/poke_match_logo.png',
+          width: Sizes.appBarLogo,
+        ),
+      ),
       body: pageState == null
           ? const Center(child: CircularProgressIndicator.adaptive())
           : SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/poke_match_logo.png',
-                      width: MediaQuery.sizeOf(context).width * 0.5,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    maxWidth: Sizes.appMaxWidth,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
+                    child: Column(
+                      children: [
+                        gapH8,
+                        Flexible(
+                          child: AppinioSwiper(
+                            controller: pageNotifier.swipeController,
+                            initialIndex: pageNotifier.swipeCount,
+                            cardCount: pageState.length,
+                            backgroundCardOffset: const Offset(0, 0),
+                            // スワイプアニメーションをトリガーするためにパンしなければならない最小距離
+                            threshold: MediaQuery.sizeOf(context).width * 0.25,
+                            onSwipeEnd: (previousIndex, targetIndex, activity) {
+                              pageNotifier.onSwipeEnd(
+                                context,
+                                previousIndex,
+                                targetIndex,
+                                activity,
+                              );
+                            },
+                            cardBuilder: (context, index) {
+                              final pokemon = pageState[index];
+                              return PokemonCard(
+                                name: pokemon.name,
+                                imageUrl: pokemon.imageUrl,
+                                types: pokemon.types,
+                                height: pokemon.height,
+                                weight: pokemon.weight,
+                                onTapLNope: () async {
+                                  pageNotifier.swipeController.swipeLeft();
+                                },
+                                onTapSuerLike: () async {
+                                  pageNotifier.swipeController.swipeUp();
+                                },
+                                onTapLike: () async {
+                                  pageNotifier.swipeController.swipeRight();
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    gapH16,
-                    Flexible(
-                      child: AppinioSwiper(
-                        controller: pageNotifier.swipeController,
-                        cardCount: pageState.length,
-                        backgroundCardOffset: const Offset(0, 0),
-                        // スワイプアニメーションをトリガーするためにパンしなければならない最小距離
-                        threshold: MediaQuery.sizeOf(context).width * 0.25,
-                        onSwipeEnd: (previousIndex, targetIndex, activity) {
-                          pageNotifier.onSwipeEnd(
-                            context,
-                            previousIndex,
-                            targetIndex,
-                            activity,
-                          );
-                        },
-                        cardBuilder: (context, index) {
-                          final pokemon = pageState[index];
-                          return PokemonCard(
-                            name: pokemon.name,
-                            imageUrl: pokemon.imageUrl,
-                            types: pokemon.types,
-                            height: pokemon.height,
-                            weight: pokemon.weight,
-                            onTapLNope: () async {
-                              pageNotifier.swipeController.swipeLeft();
-                            },
-                            onTapSuerLike: () async {
-                              pageNotifier.swipeController.swipeUp();
-                            },
-                            onTapLike: () async {
-                              pageNotifier.swipeController.swipeRight();
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
