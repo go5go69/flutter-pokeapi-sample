@@ -37,6 +37,14 @@ class HomePage extends ConsumerWidget {
                         backgroundCardOffset: const Offset(0, 0),
                         // スワイプアニメーションをトリガーするためにパンしなければならない最小距離
                         threshold: MediaQuery.sizeOf(context).width * 0.25,
+                        onSwipeEnd: (previousIndex, targetIndex, activity) {
+                          pageNotifier.onSwipeEnd(
+                            context,
+                            previousIndex,
+                            targetIndex,
+                            activity,
+                          );
+                        },
                         cardBuilder: (context, index) {
                           final pokemon = pageState[index];
                           return PokemonCard(
