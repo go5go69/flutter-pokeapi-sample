@@ -8,7 +8,7 @@ import 'package:poke_match/domain/models/pokemon.dart';
 import 'package:poke_match/presentations/views/widgets/dialog_content.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'home_page_model.g.dart';
+part 'home_page_view_model.g.dart';
 
 @riverpod
 class HomePageViewModel extends _$HomePageViewModel {
