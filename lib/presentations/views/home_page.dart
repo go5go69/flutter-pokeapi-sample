@@ -51,6 +51,15 @@ class HomePage extends ConsumerWidget {
                             types: pokemon.types,
                             height: pokemon.height,
                             weight: pokemon.weight,
+                            onTapLNope: () async {
+                              pageNotifier.swipeController.swipeLeft();
+                            },
+                            onTapSuerLike: () async {
+                              pageNotifier.swipeController.swipeUp();
+                            },
+                            onTapLike: () async {
+                              pageNotifier.swipeController.swipeRight();
+                            },
                           );
                         },
                       ),

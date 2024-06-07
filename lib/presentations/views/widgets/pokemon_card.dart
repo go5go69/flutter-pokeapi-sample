@@ -9,6 +9,9 @@ class PokemonCard extends StatelessWidget {
   final List<String> types;
   final double height;
   final double weight;
+  final void Function()? onTapLNope;
+  final void Function()? onTapLike;
+  final void Function()? onTapSuerLike;
   const PokemonCard({
     super.key,
     required this.name,
@@ -16,6 +19,9 @@ class PokemonCard extends StatelessWidget {
     required this.types,
     required this.height,
     required this.weight,
+    required this.onTapLNope,
+    required this.onTapSuerLike,
+    required this.onTapLike,
   });
   @override
   Widget build(BuildContext context) {
@@ -85,17 +91,17 @@ class PokemonCard extends StatelessWidget {
                   AppIconButton(
                     color: Colors.redAccent,
                     icon: Icons.heart_broken_rounded,
-                    onTap: () {},
+                    onTap: onTapLNope,
                   ),
                   AppIconButton(
                     color: Colors.blueAccent,
                     icon: Icons.star_rounded,
-                    onTap: () {},
+                    onTap: onTapSuerLike,
                   ),
                   AppIconButton(
                     color: Colors.greenAccent,
                     icon: Icons.favorite_rounded,
-                    onTap: () {},
+                    onTap: onTapLike,
                   ),
                 ],
               ),

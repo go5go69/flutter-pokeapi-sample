@@ -53,29 +53,50 @@ class HomePageViewModel extends _$HomePageViewModel {
 
       switch (activity.direction) {
         case AxisDirection.left:
-          debugPrint('Swiped Left');
-          await _updatePokemonList();
+          _swipeLeft(context, pokemon);
           break;
         case AxisDirection.right:
-          debugPrint('Swiped Right');
-          final isMatch = myIdList.contains(pokemon.id);
-          await _updatePokemonList();
-          if (isMatch) {
-            await _showMatchDialog(context, pokemon.imageUrl);
-          }
+          _swipeRight(context, pokemon);
           break;
         case AxisDirection.up:
-          debugPrint('Swiped Up');
-          await _updatePokemonList();
-          await _showMatchDialog(context, pokemon.imageUrl);
+          _swipeUp(context, pokemon);
           break;
         case AxisDirection.down:
-          debugPrint('Swiped Down');
+          _swipeDown(context, pokemon);
           break;
         default:
           break;
       }
     }
+  }
+
+  /// 左にスワイプしたときの処理
+  Future<void> _swipeLeft(BuildContext context, Pokemon pokemon) async {
+    debugPrint('Swiped Left');
+    await _updatePokemonList();
+  }
+
+  /// 右にスワイプしたときの処理
+  Future<void> _swipeRight(BuildContext context, Pokemon pokemon) async {
+    debugPrint('Swiped Right');
+    final isMatch = myIdList.contains(pokemon.id);
+    await _updatePokemonList();
+    if (isMatch) {
+      await _showMatchDialog(context, pokemon.imageUrl);
+    }
+  }
+
+  /// 上にスワイプしたときの処理
+  Future<void> _swipeUp(BuildContext context, Pokemon pokemon) async {
+    debugPrint('Swiped Up');
+    await _updatePokemonList();
+    await _showMatchDialog(context, pokemon.imageUrl);
+  }
+
+  /// 左にスワイプしたときの処理
+  Future<void> _swipeDown(BuildContext context, Pokemon pokemon) async {
+    debugPrint('Swiped Left');
+    await _updatePokemonList();
   }
 
   /// マッチした場合にダイアログを表示
