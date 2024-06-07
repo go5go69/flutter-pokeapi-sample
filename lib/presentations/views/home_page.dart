@@ -2,7 +2,7 @@ import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke_match/constants/app_sizes.dart';
-import 'package:poke_match/presentations/view_models/home_page_model.dart';
+import 'package:poke_match/presentations/view_models/home_page_view_model.dart';
 import 'package:poke_match/presentations/views/widgets/pokemon_card.dart';
 
 class HomePage extends ConsumerWidget {
@@ -16,12 +16,6 @@ class HomePage extends ConsumerWidget {
     final pageNotifier = ref.read(homePageViewModelProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'assets/images/poke_match_logo.png',
-          width: MediaQuery.sizeOf(context).width * 0.5,
-        ),
-      ),
       body: pageState == null
           ? const Center(child: CircularProgressIndicator.adaptive())
           : SafeArea(
@@ -29,6 +23,10 @@ class HomePage extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
                 child: Column(
                   children: [
+                    Image.asset(
+                      'assets/images/poke_match_logo.png',
+                      width: MediaQuery.sizeOf(context).width * 0.5,
+                    ),
                     gapH16,
                     Flexible(
                       child: AppinioSwiper(
@@ -37,6 +35,14 @@ class HomePage extends ConsumerWidget {
                         backgroundCardOffset: const Offset(0, 0),
                         // スワイプアニメーションをトリガーするためにパンしなければならない最小距離
                         threshold: MediaQuery.sizeOf(context).width * 0.25,
+                        onSwipeEnd: (previousIndex, targetIndex, activity) {
+                          pageNotifier.onSwipeEnd(
+                            context,
+                            previousIndex,
+                            targetIndex,
+                            activity,
+                          );
+                        },
                         cardBuilder: (context, index) {
                           final pokemon = pageState[index];
                           return PokemonCard(

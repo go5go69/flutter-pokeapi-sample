@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_page_model.dart';
+part of 'home_page_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$homePageViewModelHash() => r'00374845e2388299ab39c5e8cc6a44ede6cdf59f';
+String _$homePageViewModelHash() => r'5b42f4f34210506766fa5b7cd8676f1e20cdf2b1';
 
 /// See also [HomePageViewModel].
 @ProviderFor(HomePageViewModel)
