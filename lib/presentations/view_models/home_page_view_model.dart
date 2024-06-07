@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:poke_match/core/state/id_list.dart';
+import 'package:poke_match/core/state/matched_pokemon_provider.dart';
 import 'package:poke_match/data/repositories/pokemon_repository.dart';
 import 'package:poke_match/domain/models/pokemon.dart';
 import 'package:poke_match/presentations/views/widgets/dialog_content.dart';
@@ -83,6 +84,9 @@ class HomePageViewModel extends _$HomePageViewModel {
     await _updatePokemonList();
     if (isMatch) {
       await _showMatchDialog(context, pokemon.imageUrl);
+      ref
+          .read(matchedPokemonProviderProvider.notifier)
+          .addMatchedPokemon(pokemon);
     }
   }
 
@@ -91,6 +95,9 @@ class HomePageViewModel extends _$HomePageViewModel {
     debugPrint('Swiped Up');
     await _updatePokemonList();
     await _showMatchDialog(context, pokemon.imageUrl);
+    ref
+        .read(matchedPokemonProviderProvider.notifier)
+        .addMatchedPokemon(pokemon);
   }
 
   /// 左にスワイプしたときの処理
