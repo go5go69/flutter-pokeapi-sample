@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:poke_match/core/state/id_list.dart';
+import 'package:poke_match/core/state/matched_pokemon_provider.dart';
 import 'package:poke_match/data/repositories/pokemon_repository.dart';
 import 'package:poke_match/domain/models/pokemon.dart';
 import 'package:poke_match/presentations/views/widgets/dialog_content.dart';
@@ -10,7 +11,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_page_view_model.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class HomePageViewModel extends _$HomePageViewModel {
   @override
   Future<List<Pokemon>> build() async {
@@ -37,6 +38,11 @@ class HomePageViewModel extends _$HomePageViewModel {
   /// idのリスト
   /// * Likeした際にこれに{pokemon.id}が含まれていればマッチ判定
   List<int> myIdList = [];
+
+  /// スワイプした回数
+  /// * view側: AppinioSwiperのinitialIndex
+  /// * [caution] 画面遷移した際にAppinioSwiperのindexがリセットされるため
+  int swipeCount = 0;
 
   /// スワイプ時の処理
   Future<void> onSwipeEnd(
@@ -83,6 +89,9 @@ class HomePageViewModel extends _$HomePageViewModel {
     await _updatePokemonList();
     if (isMatch) {
       await _showMatchDialog(context, pokemon.imageUrl);
+      ref
+          .read(matchedPokemonProviderProvider.notifier)
+          .addMatchedPokemon(pokemon);
     }
   }
 
@@ -91,6 +100,9 @@ class HomePageViewModel extends _$HomePageViewModel {
     debugPrint('Swiped Up');
     await _updatePokemonList();
     await _showMatchDialog(context, pokemon.imageUrl);
+    ref
+        .read(matchedPokemonProviderProvider.notifier)
+        .addMatchedPokemon(pokemon);
   }
 
   /// 左にスワイプしたときの処理
@@ -118,10 +130,13 @@ class HomePageViewModel extends _$HomePageViewModel {
 
     final newPokemonList = List<Pokemon>.from(state.value!);
 
+    swipeCount++;
+
     final pokemon =
         await pokemonRepository.getPokemonById(idListState[0].toString());
 
     newPokemonList.add(pokemon);
+
     idListNotifier.remove();
     state = AsyncValue.data(newPokemonList);
   }

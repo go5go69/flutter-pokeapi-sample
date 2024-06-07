@@ -17,6 +17,8 @@ class AppThemeData {
       ),
       textTheme: appTextTheme,
 
+      splashColor: Colors.transparent,
+
       // textField
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -24,6 +26,18 @@ class AppThemeData {
           borderSide: BorderSide.none,
           borderRadius: BorderRadius.circular(Sizes.p8),
         ),
+      ),
+
+      // bottomNavigation
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        selectedIconTheme: IconThemeData(
+          size: Sizes.p32,
+          color: Colors.blueAccent,
+        ),
+        unselectedIconTheme: IconThemeData(size: Sizes.p32),
       ),
     );
   }

@@ -40,9 +40,14 @@ class PokemonCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: Image.network(
-                      imageUrl,
-                      fit: BoxFit.fitHeight,
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.sizeOf(context).height * 0.5,
+                      ),
+                      child: Image.network(
+                        imageUrl,
+                        fit: BoxFit.fitHeight,
+                      ),
                     ),
                   ),
                   Text(
