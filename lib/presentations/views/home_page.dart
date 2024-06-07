@@ -1,19 +1,20 @@
+import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:poke_match/constants/app_sizes.dart';
 import 'package:poke_match/presentations/view_models/home_page_model.dart';
-import 'package:poke_match/presentations/views/widgets/app_icon_button.dart';
 import 'package:poke_match/presentations/views/widgets/pokemon_card.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pageState = switch (ref.watch(homePageModelProvider)) {
+    final pageState = switch (ref.watch(homePageViewModelProvider)) {
       AsyncData(:final value) => value,
       _ => null,
     };
-    
+    final pageNotifier = ref.read(homePageViewModelProvider.notifier);
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -24,41 +25,34 @@ class HomePage extends ConsumerWidget {
       body: pageState == null
           ? const Center(child: CircularProgressIndicator.adaptive())
           : SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
-          child: Column(
-            children: [
-              gapH8,
-              PokemonCard(
-                      name: pageState.name,
-                      imageUrl: pageState.imageUrl,
-                      types: pageState.types,
-                      height: pageState.height,
-                      weight: pageState.weight,
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: Sizes.p8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Sizes.p8),
+                child: Column(
                   children: [
-                    AppIconButton(
-                      color: Colors.redAccent,
-                      icon: Icons.heart_broken_rounded,
-                      onTap: () {},
-                    ),
-                    AppIconButton(
-                      color: Colors.greenAccent,
-                      icon: Icons.favorite_rounded,
-                      onTap: () {},
+                    gapH16,
+                    Flexible(
+                      child: AppinioSwiper(
+                        controller: pageNotifier.swipeController,
+                        cardCount: pageState.length,
+                        backgroundCardOffset: const Offset(0, 0),
+                        // スワイプアニメーションをトリガーするためにパンしなければならない最小距離
+                        threshold: MediaQuery.sizeOf(context).width * 0.25,
+                        cardBuilder: (context, index) {
+                          final pokemon = pageState[index];
+                          return PokemonCard(
+                            name: pokemon.name,
+                            imageUrl: pokemon.imageUrl,
+                            types: pokemon.types,
+                            height: pokemon.height,
+                            weight: pokemon.weight,
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
+              ),
+            ),
     );
   }
 }

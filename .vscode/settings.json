@@ -66,8 +66,10 @@
 		"**/Pods": true
 	},
 	"cSpell.words": [
+		"Appinio",
 		"firestore",
 		"Pretendard",
-		"riverpod"
+		"riverpod",
+		"Swiper"
 	],
 }
