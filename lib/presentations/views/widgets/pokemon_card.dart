@@ -42,11 +42,11 @@ class PokemonCard extends StatelessWidget {
                   Center(
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                        maxHeight: MediaQuery.sizeOf(context).height * 0.5,
+                        maxHeight: MediaQuery.sizeOf(context).height * 0.4,
                       ),
                       child: Image.network(
                         imageUrl,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),

@@ -3,26 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:poke_match/constants/app_sizes.dart';
+import 'package:poke_match/enums/swipe_direction.dart';
 import 'package:poke_match/presentations/view_models/home_page_view_model.dart';
 import 'package:poke_match/presentations/views/widgets/pokemon_card.dart';
-
-enum SwipeDirection {
-  up,
-  right,
-  left;
-
-  @override
-  String toString() {
-    switch (this) {
-      case SwipeDirection.up:
-        return 'SUPER LIKE!!';
-      case SwipeDirection.right:
-        return 'LIKE!';
-      case SwipeDirection.left:
-        return 'NOPE';
-    }
-  }
-}
+import 'package:poke_match/presentations/views/widgets/swipe_indicator.dart';
 
 class HomePage extends HookConsumerWidget {
   const HomePage({super.key});
@@ -123,41 +107,9 @@ class HomePage extends HookConsumerWidget {
                                   ),
                                   index == pageNotifier.swipeCount + 1
                                       ? const SizedBox.shrink()
-                                      : switch (swipeDirection.value) {
-                                          SwipeDirection.up => Align(
-                                              alignment: Alignment.bottomCenter,
-                                              child: Text(
-                                                swipeDirection.value!
-                                                    .toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .displayMedium,
-                                              ),
-                                            ),
-                                          SwipeDirection.right => Positioned(
-                                              left: 16,
-                                              top: 8,
-                                              child: Text(
-                                                swipeDirection.value!
-                                                    .toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .displayMedium,
-                                              ),
-                                            ),
-                                          SwipeDirection.left => Positioned(
-                                              right: 16,
-                                              top: 8,
-                                              child: Text(
-                                                swipeDirection.value!
-                                                    .toString(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .displaySmall,
-                                              ),
-                                            ),
-                                          null => const SizedBox.shrink(),
-                                        }
+                                      : SwipeIndicator(
+                                          swipeDirection: swipeDirection.value,
+                                        ),
                                 ],
                               );
                             },
