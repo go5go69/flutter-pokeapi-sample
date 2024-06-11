@@ -14,4 +14,9 @@ class IdList extends _$IdList {
     newList.removeAt(0);
     state = newList;
   }
+
+  /// test用にStateを返す
+  List<int> debugState() {
+    return state;
+  }
 }
