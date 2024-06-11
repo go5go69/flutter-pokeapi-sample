@@ -49,7 +49,7 @@ class HomePage extends HookConsumerWidget {
                             cardCount: pageState.length,
                             backgroundCardOffset: const Offset(0, 0),
                             // スワイプアニメーションをトリガーするためにパンしなければならない最小距離
-                            threshold: MediaQuery.sizeOf(context).width * 0.25,
+                            // threshold: MediaQuery.sizeOf(context).width * 0.25,
                             onCardPositionChanged: (position) {
                               initialTapPosition.value ??= position.offset;
                               var currentPosition = position.offset;
@@ -60,18 +60,14 @@ class HomePage extends HookConsumerWidget {
                               if (relativeX.abs() > relativeY.abs()) {
                                 if (relativeX < 0) {
                                   swipeDirection.value = SwipeDirection.right;
-                                  debugPrint('LIKE!');
                                 } else {
                                   swipeDirection.value = SwipeDirection.left;
-                                  debugPrint('NOPE');
                                 }
                               } else {
                                 if (relativeY < 0) {
                                   swipeDirection.value = SwipeDirection.left;
-                                  debugPrint('NOPE');
-                                } else {
+                                } else if (relativeY > 5) {
                                   swipeDirection.value = SwipeDirection.up;
-                                  debugPrint('SUPER LIKE!!');
                                 }
                               }
                             },
