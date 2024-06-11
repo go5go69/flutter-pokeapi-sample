@@ -7,7 +7,7 @@ part of 'matched_pokemon_provider.dart';
 // **************************************************************************
 
 String _$matchedPokemonProviderHash() =>
-    r'0d8581662db77fbbfab1a9bd01c0de59aac06e0c';
+    r'bcb8edda50506c12b105d33b8a718b794122cc7d';
 
 /// See also [MatchedPokemonProvider].
 @ProviderFor(MatchedPokemonProvider)

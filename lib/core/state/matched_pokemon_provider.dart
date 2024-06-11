@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:poke_match/domain/models/pokemon.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,6 +12,10 @@ class MatchedPokemonProvider extends _$MatchedPokemonProvider {
     List<Pokemon> newList = List.from(state);
     newList.add(pokemon);
     state = newList;
-    debugPrint('matchedPokemon: ${state.length}');
+  }
+
+  /// test用にStateを返す
+  List<Pokemon> debugState() {
+    return state;
   }
 }
