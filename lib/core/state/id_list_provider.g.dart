@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'id_list.dart';
+part of 'id_list_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$idListHash() => r'9bdfde3c14e899c560c8575af10f0edb1cca7d69';
+String _$idListHash() => r'bd3b17387cd83415ee2b7b71864887d0ea1cb3df';
 
 /// See also [IdList].
 @ProviderFor(IdList)

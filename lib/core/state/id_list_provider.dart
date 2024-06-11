@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'id_list.g.dart';
+part 'id_list_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 class IdList extends _$IdList {

@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:appinio_swiper/appinio_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:poke_match/core/state/id_list.dart';
+import 'package:poke_match/core/state/id_list_provider.dart';
 import 'package:poke_match/core/state/matched_pokemon_provider.dart';
 import 'package:poke_match/data/repositories/pokemon_repository.dart';
 import 'package:poke_match/domain/models/pokemon.dart';
