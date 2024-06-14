@@ -1,7 +1,8 @@
 <img src="https://github.com/go5go69/poke-match/blob/docs/update_readme/assets/images/poke_match_logo.png" width="100%">
 
 学習用レポジトリ  
-「Poke Match」はPokeAPIからポケモンをランダムに取得し表示、マッチング対象のポケモンをTinder風のUI/UXで選り分けられます。
+「Poke Match」はPokeAPIからポケモンをランダムに取得し表示、マッチング対象のポケモンをTinder風のUI/UXで選り分けられます。  
+Deploy: https://pokemon-matching.web.app/
 
 ![](https://github.com/go5go69/poke-match/blob/docs/update_readme/assets/images/app_image.GIF)
 
