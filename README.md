@@ -1,16 +1,46 @@
-# poke_match
+<img src="https://github.com/go5go69/poke-match/blob/docs/update_readme/assets/images/poke_match_logo.png" width="100%">
 
-A new Flutter project.
+学習用レポジトリ  
+「Poke Match」はPokeAPIからポケモンをランダムに取得し表示、マッチング対象のポケモンをTinder風のUI/UXで選り分けられます。
+
+![](https://github.com/go5go69/poke-match/blob/docs/update_readme/assets/images/app_image.GIF)
 
 ## Getting Started
+このFlutterプロジェクトにはfvmを利用しいています。  
+`fvm flutter pub get`  
+を実行してください。  
 
-This project is a starting point for a Flutter application.
+## Features
+- ホーム画面ではスワイプでマッチング対象を選り分けられます。
+  - Right: LIKE（20%マッチ）
+  - Up: SUPER LIKE（100%マッチ）
+  - Left or Down: NOPE
+- マッチしたポケモンのリストを表示
 
-A few resources to get you started if this is your first Flutter project:
+## Architecture
+```
+lib
+├── constants/
+├── core/
+│   ├── network/
+│   └── state/
+├── data/
+│   ├── repositories/
+│   └── services/
+├── domain/
+│   └── models/
+├── enums/
+├── presentations/
+│   ├── view_models/
+│   └── views/
+│       └── widgets/
+├── themes/
+└── main.dart
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Author
+https://zenn.dev/go5go69
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Refarences
+https://pokeapi.co/  
+https://codewithandrea.com/articles/flutter-app-architecture-riverpod-introduction/  
